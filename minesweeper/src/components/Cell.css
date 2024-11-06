@@ -1,31 +1,43 @@
 /* components/Cell.css */
+
+/* Basic Cell Styling */
 .cell {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ccc;
-    font-weight: bold;
-    font-size: 18px;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Makes the cell fit within its grid space */
+  aspect-ratio: 1; /* Ensures cells remain square */
+  font-weight: bold;
+  font-size: 18px; /* Default font size */
+  cursor: pointer;
+  border: 1px solid #ccc;
+  transition: background-color 0.2s ease; /* Smooth background transition */
+}
+
+/* State-specific styles */
+.cell-safe {
+  background-color: #b0c4de;
+  color: green;
+}
+
+.cell-bomb {
+  background-color: #ffcccc;
+  color: red;
+}
+
+.cell-unselected {
+  background-color: #add8e6;
+}
+
+/* Hover Effect */
+.cell:hover {
+  background-color: #87ceeb; /* Light blue shade on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .cell {
+    font-size: 14px; /* Smaller font size on mobile screens */
+    border: 1px solid #aaa; /* Slightly lighter border for smaller screens */
   }
-  
-  .cell-unselected {
-    background-color: #add8e6;
-  }
-  
-  .cell-safe {
-    background-color: #b0c4de;
-    color: green;
-    cursor: default;
-  }
-  
-  .cell-bomb {
-    background-color: #ffcccc;
-    color: red;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: default;
-  }
-  
+}

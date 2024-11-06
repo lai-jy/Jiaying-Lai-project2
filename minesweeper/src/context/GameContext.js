@@ -5,7 +5,7 @@ export const GameContext = createContext();
 
 export const GameProvider = ({ children, difficulty }) => {
   const difficultySettings = {
-    easy: { rows: 8, cols: 8, mines: 10 },
+    easy: { rows: 4, cols: 4, mines: 2 },
     medium: { rows: 16, cols: 16, mines: 40 },
     hard: { rows: 16, cols: 30, mines: 99 },
   };
@@ -72,7 +72,7 @@ export const GameProvider = ({ children, difficulty }) => {
   };
 
   const checkWinCondition = () => {
-    if (!cellsRevealed || gameStatus !== "playing") return;
+    if (gameStatus !== "playing") return;
 
     const allSafeRevealed = board.every((row) =>
       row.every((cell) => cell.isRevealed || cell.isMine)

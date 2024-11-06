@@ -1,11 +1,22 @@
 /* components/Board.css */
+
+/* Board container */
 .board {
-    display: inline-block;
+    display: grid;
+    gap: 2px; /* Adds space between cells */
     border: 2px solid #666;
-    margin: 20px auto;
+    margin: 50px auto;
+    /* Define a responsive grid for the cells */
+    grid-template-columns: repeat(auto-fit, minmax(5px, 1fr));
+    width: 100%; /* Ensures the board fits the container */
+    max-width: 400px; /* Limits board width on larger screens */
   }
   
-  .board-row {
-    display: flex;
+  /* Responsive styling for smaller screens */
+  @media (max-width: 768px) {
+    .board {
+      max-width: 100%; /* Allows the board to stretch fully on small screens */
+      grid-template-columns: repeat(auto-fit, minmax(5px, 1fr)); /* Smaller cells */
+    }
   }
   

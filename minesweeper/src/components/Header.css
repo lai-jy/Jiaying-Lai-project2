@@ -1,18 +1,36 @@
-/* Header.css */
+/* components/Header.css */
+
 .header {
-    background-color: #333;
-    padding: 10px;
     display: flex;
     justify-content: center;
-    gap: 15px;
+    align-items: center;
+    background-color: #333;
+    padding: 10px;
   }
   
   .header a {
     color: #fff;
     text-decoration: none;
+    padding: 8px 16px;
+    font-weight: bold;
   }
   
+  /* Hover effect */
   .header a:hover {
-    color: #ddd;
+    background-color: #555;
+    border-radius: 4px;
   }
   
+  /* Responsive for smaller screens */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      padding: 15px;
+    }
+  
+    .header a {
+      padding: 10px 0;
+      width: 100%;
+      text-align: center;
+    }
+  }
