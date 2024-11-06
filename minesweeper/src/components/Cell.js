@@ -7,11 +7,11 @@ const Cell = ({ cell, onClick }) => {
 
   if (cell.isRevealed) {
     if (cell.isMine) {
-      cellContent = "💣";
+      cellContent = "💣"; // Display bomb icon if this is a mine
     } else if (cell.adjacentMines > 0) {
-      cellContent = cell.adjacentMines;
+      cellContent = cell.adjacentMines; // Show number of adjacent mines
     } else {
-      cellContent = "";
+      cellContent = ""; // Show empty content for cells with no adjacent mines
     }
   }
 

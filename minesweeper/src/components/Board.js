@@ -5,23 +5,42 @@ import { GameContext } from "../context/GameContext";
 import "./Board.css";
 
 const Board = () => {
-  const { board, setBoard, gameStatus, setCellsRevealed, handleGameEnd } = useContext(GameContext);
+  const { board, setBoard, gameStatus, setGameStatus } = useContext(GameContext);
+
+  const revealEmptyCells = (board, row, col, visited) => {
+    if (row < 0 || row >= board.length || col < 0 || col >= board[0].length || visited[row][col] || board[row][col].isRevealed) {
+      return;
+    }
+
+    visited[row][col] = true;
+    board[row][col].isRevealed = true;
+
+    if (board[row][col].adjacentMines === 0) {
+      for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+          if (i !== 0 || j !== 0) {
+            revealEmptyCells(board, row + i, col + j, visited);
+          }
+        }
+      }
+    }
+  };
 
   const revealCell = (row, col) => {
     if (gameStatus !== "playing" || board[row][col].isRevealed) return;
 
-    const newBoard = board.map((rowArr, rowIndex) =>
-      rowArr.map((cell, colIndex) =>
-        rowIndex === row && colIndex === col ? { ...cell, isRevealed: true } : cell
-      )
-    );
+    const newBoard = board.map((row) => row.map((cell) => ({ ...cell })));
 
-    const cell = newBoard[row][col];
-    if (cell.isMine) {
-      handleGameEnd("lost");
+    if (newBoard[row][col].isMine) {
+      setGameStatus("lost");
+      newBoard[row][col].isRevealed = true; // Reveal the bomb
     } else {
-      setCellsRevealed(true);
+      const visited = Array(newBoard.length)
+        .fill()
+        .map(() => Array(newBoard[0].length).fill(false));
+      revealEmptyCells(newBoard, row, col, visited);
     }
+
     setBoard(newBoard);
   };
 
