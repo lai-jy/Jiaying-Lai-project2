@@ -1,0 +1,18 @@
+/* Rules.css */
+.rules {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .rules h1 {
+    font-size: 2rem;
+    color: #444;
+  }
+  
+  .rules ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  

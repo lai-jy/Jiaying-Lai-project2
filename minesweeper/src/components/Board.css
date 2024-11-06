@@ -1,0 +1,11 @@
+/* Board.css */
+.board {
+    display: inline-block;
+    border: 2px solid #666;
+    margin: 20px auto;
+  }
+  
+  .board-row {
+    display: flex;
+  }
+  
