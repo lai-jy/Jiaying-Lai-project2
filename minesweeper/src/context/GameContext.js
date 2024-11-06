@@ -5,7 +5,7 @@ export const GameContext = createContext();
 
 export const GameProvider = ({ children, difficulty }) => {
   const difficultySettings = {
-    easy: { rows: 4, cols: 4, mines: 2 },
+    easy: { rows: 8, cols: 8, mines: 10 },
     medium: { rows: 16, cols: 16, mines: 40 },
     hard: { rows: 16, cols: 30, mines: 99 },
   };
@@ -27,26 +27,26 @@ export const GameProvider = ({ children, difficulty }) => {
   }, [difficulty]);
 
   const createBoard = (rows, cols, mines) => {
-    const board = Array(rows)
-      .fill()
-      .map(() =>
-        Array(cols).fill({
-          isMine: false,
-          adjacentMines: 0,
-          isRevealed: false,
-        })
-      );
+    const board = Array.from({ length: rows }, () =>
+      Array.from({ length: cols }, () => ({
+        isMine: false,
+        adjacentMines: 0,
+        isRevealed: false,
+      }))
+    );
 
+    // Place mines randomly
     let placedMines = 0;
     while (placedMines < mines) {
-      const randomRow = Math.floor(Math.random() * rows);
-      const randomCol = Math.floor(Math.random() * cols);
-      if (!board[randomRow][randomCol].isMine) {
-        board[randomRow][randomCol] = { ...board[randomRow][randomCol], isMine: true };
+      const row = Math.floor(Math.random() * rows);
+      const col = Math.floor(Math.random() * cols);
+      if (!board[row][col].isMine) {
+        board[row][col].isMine = true;
         placedMines++;
       }
     }
 
+    // Calculate adjacent mines for each cell
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         if (!board[row][col].isMine) {
@@ -55,15 +55,22 @@ export const GameProvider = ({ children, difficulty }) => {
             for (let j = -1; j <= 1; j++) {
               const newRow = row + i;
               const newCol = col + j;
-              if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols && board[newRow][newCol].isMine) {
+              if (
+                newRow >= 0 &&
+                newRow < rows &&
+                newCol >= 0 &&
+                newCol < cols &&
+                board[newRow][newCol].isMine
+              ) {
                 mineCount++;
               }
             }
           }
-          board[row][col] = { ...board[row][col], adjacentMines: mineCount };
+          board[row][col].adjacentMines = mineCount;
         }
       }
     }
+
     return board;
   };
 
@@ -72,11 +79,12 @@ export const GameProvider = ({ children, difficulty }) => {
   };
 
   const checkWinCondition = () => {
-    if (gameStatus !== "playing") return;
+    if (!cellsRevealed || gameStatus !== "playing") return;
 
-    const allSafeRevealed = board.every((row) =>
-      row.every((cell) => cell.isRevealed || cell.isMine)
+    const allSafeRevealed = board.every(row =>
+      row.every(cell => cell.isRevealed || cell.isMine)
     );
+
     if (allSafeRevealed) {
       setGameStatus("won");
     }

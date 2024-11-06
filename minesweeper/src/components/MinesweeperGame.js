@@ -1,15 +1,13 @@
 // MinesweeperGame.js
 import React, { useContext } from "react";
-import { GameProvider, GameContext } from "../context/GameContext"
+import { GameProvider, GameContext } from "../context/GameContext";
 import Board from "./Board";
 
-const MinesweeperGame = ({ difficulty }) => {
-  return (
-    <GameProvider difficulty={difficulty}>
-      <GameContent />
-    </GameProvider>
-  );
-};
+const MinesweeperGame = ({ difficulty }) => (
+  <GameProvider difficulty={difficulty}>
+    <GameContent />
+  </GameProvider>
+);
 
 const GameContent = () => {
   const { gameStatus, initializeBoard } = useContext(GameContext);
