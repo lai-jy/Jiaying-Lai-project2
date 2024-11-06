@@ -9,7 +9,7 @@
     /* Define a responsive grid for the cells */
     grid-template-columns: repeat(auto-fit, minmax(5px, 1fr));
     width: 100%; /* Ensures the board fits the container */
-    max-width: 600px; /* Limits board width on larger screens */
+    max-width: 750px; /* Limits board width on larger screens */
   }
   
   /* Responsive styling for smaller screens */
