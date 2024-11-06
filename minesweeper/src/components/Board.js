@@ -1,11 +1,14 @@
-// Board.js
-import React from "react";
+// components/Board.js
+import React, { useContext } from "react";
 import Cell from "./Cell";
+import { GameContext } from "../context/GameContext";
 import "./Board.css";
 
-const Board = ({ board, setBoard, onGameEnd, gameStatus, setCellsRevealed }) => {
+const Board = () => {
+  const { board, setBoard, gameStatus, setCellsRevealed, handleGameEnd } = useContext(GameContext);
+
   const revealCell = (row, col) => {
-    if (gameStatus !== "playing") return;
+    if (gameStatus !== "playing" || board[row][col].isRevealed) return;
 
     const newBoard = board.map((rowArr, rowIndex) =>
       rowArr.map((cell, colIndex) =>
@@ -15,9 +18,9 @@ const Board = ({ board, setBoard, onGameEnd, gameStatus, setCellsRevealed }) => 
 
     const cell = newBoard[row][col];
     if (cell.isMine) {
-      onGameEnd("lost");
+      handleGameEnd("lost");
     } else {
-      setCellsRevealed(true); // Indicate that at least one cell has been revealed
+      setCellsRevealed(true);
     }
     setBoard(newBoard);
   };
@@ -27,11 +30,7 @@ const Board = ({ board, setBoard, onGameEnd, gameStatus, setCellsRevealed }) => 
       {board.map((row, rowIndex) => (
         <div key={rowIndex} className="board-row">
           {row.map((cell, colIndex) => (
-            <Cell
-              key={colIndex}
-              cell={cell}
-              onClick={() => revealCell(rowIndex, colIndex)}
-            />
+            <Cell key={colIndex} cell={cell} onClick={() => revealCell(rowIndex, colIndex)} />
           ))}
         </div>
       ))}
