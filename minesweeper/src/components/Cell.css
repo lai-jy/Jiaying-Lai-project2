@@ -1,20 +1,17 @@
-/* components/Cell.css */
 
-/* Basic Cell Styling */
 .cell {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%; /* Makes the cell fit within its grid space */
-  aspect-ratio: 1; /* Ensures cells remain square */
+  width: 100%; 
+  aspect-ratio: 1; 
   font-weight: bold;
-  font-size: 18px; /* Default font size */
+  font-size: 18px; 
   cursor: pointer;
   border: 1px solid #ccc;
-  transition: background-color 0.2s ease; /* Smooth background transition */
+  transition: background-color 0.2s ease; 
 }
 
-/* State-specific styles */
 .cell-safe {
   background-color: #b0c4de;
   color: green;
@@ -29,15 +26,13 @@
   background-color: #add8e6;
 }
 
-/* Hover Effect */
 .cell:hover {
-  background-color: #87ceeb; /* Light blue shade on hover */
+  background-color: #87ceeb; 
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
   .cell {
-    font-size: 14px; /* Smaller font size on mobile screens */
-    border: 1px solid #aaa; /* Slightly lighter border for smaller screens */
+    font-size: 14px; 
+    border: 1px solid #aaa; 
   }
 }

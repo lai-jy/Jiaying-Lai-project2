@@ -1,4 +1,4 @@
-// components/Cell.js
+
 import React from "react";
 import "./Cell.css";
 

@@ -1,4 +1,4 @@
-// components/Board.js
+
 import React, { useContext, useState } from "react";
 import Cell from "./Cell";
 import { GameContext } from "../context/GameContext";

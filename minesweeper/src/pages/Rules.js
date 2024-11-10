@@ -1,4 +1,4 @@
-// pages/Rules.js
+
 import React from "react";
 import "./Rules.css";
 

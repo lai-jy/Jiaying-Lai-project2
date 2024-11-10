@@ -1,4 +1,4 @@
-// MinesweeperGame.js
+
 import React, { useContext } from "react";
 import { GameProvider, GameContext } from "../context/GameContext";
 import Board from "./Board";
